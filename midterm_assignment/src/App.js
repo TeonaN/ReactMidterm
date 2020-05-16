@@ -1,24 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useContext, useEffect } from "react";
+import Login from "./components/Form/Login";
+import Dashboard from "./components/Dashboard/Dashboard";
+
+import "./App.css";
+import { AuthContext } from "./components/contex/authContext";
+import GlobalData from "./components/GlobalData";
 
 function App() {
+  const { isAuthenticated } = useContext(AuthContext);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      {/* {!isAuthenticated && <Login />}
+      {isAuthenticated && <Dashboard />} */}
+      <GlobalData />
     </div>
   );
 }

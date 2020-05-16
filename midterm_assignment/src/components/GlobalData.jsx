@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import Categories from "./Categories";
+import Joke from "./Jokes/Joke";
+import Login from "./Form/Login";
+import { AuthContext } from "./contex/authContext";
 
 function GlobalData() {
-  const [category, setCategory] = useState([]);
+  const { isAuthenticated } = useContext(AuthContext);
+  const [categories, setcategories] = useState([]);
+  const [category, setcategory] = useState(null);
   useEffect(() => {
     axios
       .get("https://sv443.net/jokeapi/v2/categories")
       .then((response) => {
-        setCategory(response.data.categories);
+        setcategories(response.data.categories);
         console.log(response.data.categories);
       })
       .catch((err) => {
@@ -19,21 +23,32 @@ function GlobalData() {
   const style = {
     fontWeight: "bold",
   };
-  //   const categories= category.map(ob =>{
-  //       ret
-  //   })
 
   let content = null;
   let id = Math.round(Math.random() * 1000);
 
-  content = category.map((ob) => {
-    return <Categories key={id++} category={ob}></Categories>;
+  function handleClick(countryId) {
+    setcategory(countryId);
+  }
+
+  content = categories.map((ob) => {
+    return (
+      <button
+        key={id++}
+        value={ob}
+        onClick={(e) => handleClick(e.target.value)}
+      >
+        {ob}
+      </button>
+    );
   });
 
   return (
     <div className="row flex-column">
       <h1 style={style}>Global Data</h1>
       {content}
+      {!isAuthenticated && <Login />}
+      {isAuthenticated && <Joke category={category} />}
     </div>
   );
 }

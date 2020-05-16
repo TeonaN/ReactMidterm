@@ -61,18 +61,6 @@ function Login(props) {
             ref={register({ required: true })}
           />
         </div>
-        <div className="form-group form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            name="saveMe"
-            id="exampleCheck1"
-            ref={register({ required: true })}
-          />
-          <label className="form-check-label" htmlFor="exampleCheck1">
-            Check me out
-          </label>
-        </div>
         <button type="submit" className="btn btn-primary">
           Submit
         </button>

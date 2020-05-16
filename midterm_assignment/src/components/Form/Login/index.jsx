@@ -3,14 +3,14 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contex/authContext";
 
 function Login(props) {
-  const [address, setAddress] = useState("");
+  const [Email, setEmail] = useState("");
   const { errors, handleSubmit, register, watch } = useForm();
 
   const { login } = useContext(AuthContext);
 
   const onSubmit = (data) => {
     console.log(data);
-    if (data["password"] === "admin" && data["address"] === "admin") {
+    if (data["password"] === "admin" && data["Email"] === "admin") {
       login();
     }
   };
@@ -29,10 +29,10 @@ function Login(props) {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            name="address"
+            name="Email"
             ref={register({ required: true, minLength: 3 })}
           />
-          {errors.address && errors.address.type === "required" && (
+          {errors.Email && errors.Email.type === "required" && (
             <small
               id="emailHelp"
               className="form-text"
@@ -41,7 +41,7 @@ function Login(props) {
               Input required
             </small>
           )}
-          {errors.address && errors.address.type === "minLength" && (
+          {errors.Email && errors.Email.type === "minLength" && (
             <small
               id="emailHelp"
               className="form-text"
